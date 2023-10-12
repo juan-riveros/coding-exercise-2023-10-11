@@ -86,19 +86,14 @@ def main(cache_path: Path, location_url_map: dict[str,str], output_path: Path):
 
 
 if __name__ == "__main__":
-    LOCATIONS = {
-        "Half Moon Bay, California": "https://www.tide-forecast.com/locations/Half-Moon-Bay-California/tides/latest",
-        "Huntington Beach, California": "https://www.tide-forecast.com/locations/Huntington-Beach/tides/latest",
-        "Providence, Rhode Island": "https://www.tide-forecast.com/locations/Providence-Rhode-Island/tides/latest",
-        "Wrightsville Beach, North Carolina": "https://www.tide-forecast.com/locations/Wrightsville-Beach-North-Carolina/tides/latest"
-    }
-
     parser = argparse.ArgumentParser(prog="main", description="gets low tide data from tide-forecast.com")
-    parser.add_argument('--cache', required=True, help="cache file (eg. `/tmp/cache.shelf`; ie. python shelf)")
+    parser.add_argument('--cache', required=True, help="Cache File (eg. `/tmp/cache.shelf`; ie. python shelf)")
     parser.add_argument('--output', required=True, help="Output File NDJSON (eg. `./output.ndjson`)")
+    parser.add_argument('--input', required=True, help="Input File JSON (eg. `./input.json`; ie. JSON object)")
     args = parser.parse_args()
     
     cache_path = Path(args.cache)
     output_path = Path(args.output)
+    location_url_map = json.loads(Path(args.input).read_text())
     
-    main(cache_path, LOCATIONS, output_path)
+    main(cache_path, location_url_map, output_path)

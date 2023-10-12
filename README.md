@@ -16,21 +16,21 @@ venv/bin/pip install -r requirements.txt
 
 ```bash
 > ./venv/bin/python main.py --help
-
-usage: main [-h] --cache CACHE --output OUTPUT
+usage: main [-h] --cache CACHE --output OUTPUT --input INPUT
 
 gets low tide data from tide-forecast.com
 
 options:
   -h, --help       show this help message and exit
-  --cache CACHE    cache file (eg. `/tmp/cache.shelf`; ie. python shelf)
+  --cache CACHE    Cache File (eg. `/tmp/cache.shelf`; ie. python shelf)
   --output OUTPUT  Output File NDJSON (eg. `./output.ndjson`)
+  --input INPUT    Input File JSON (eg. `./input.json`; ie. JSON object)
 ```
 
 ### Run 
 
 ```bash
-> ./venv/bin/python main.py --cache /tmp/cache.shelf --output ./output.ndjson
+> ./venv/bin/python main.py --input ./input.json --cache /tmp/cache.shelf --output ./output.ndjson
 2023-10-11 20:08:18,052 - root - INFO - collecting Half Moon Bay, California tide information
 2023-10-11 20:08:18,053 - root - INFO - found Half Moon Bay, California tide info in cache; 372034 bytes
 2023-10-11 20:08:18,054 - root - INFO - collecting Huntington Beach, California tide information
@@ -46,7 +46,7 @@ options:
 While you can just delete the cache file you specify or just point somewhere else, you can also set the environment variable `DISABLE_CACHE` and this will skip the cache.
 
 ```bash
-> DISABLE_CACHE=yes ./venv/bin/python main.py --cache /tmp/cache.shelf --output ./output.ndjson
+> DISABLE_CACHE=yes ./venv/bin/python main.py --input ./input.json --cache /tmp/cache.shelf --output ./output.ndjson
 2023-10-11 20:13:50,015 - root - INFO - collecting Half Moon Bay, California tide information
 2023-10-11 20:13:50,664 - httpx - INFO - HTTP Request: GET https://www.tide-forecast.com/locations/Half-Moon-Bay-California/tides/latest "HTTP/1.1 200 OK"
 2023-10-11 20:13:50,737 - root - INFO - recieved 372034 bytes
@@ -60,3 +60,4 @@ While you can just delete the cache file you specify or just point somewhere els
 2023-10-11 20:13:52,532 - httpx - INFO - HTTP Request: GET https://www.tide-forecast.com/locations/Wrightsville-Beach-North-Carolina/tides/latest "HTTP/1.1 200 OK"
 2023-10-11 20:13:52,570 - root - INFO - recieved 357379 bytes
 ```
+

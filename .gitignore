@@ -4,3 +4,4 @@
 !.gitignore
 !README.md
 !output.ndjson
+!input.json
